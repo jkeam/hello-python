@@ -1,0 +1,13 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-python
+  namespace: knativetutorial
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/jkeam/hello-python
+          env:
+            - name: TARGET
+              value: "Python"
