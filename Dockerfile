@@ -1,17 +1,24 @@
-# Use the official lightweight Python image.
-# https://hub.docker.com/_/python
-FROM python:3.7-slim
+FROM registry.access.redhat.com/ubi8/python-39
 
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
 
-# Copy local code to the container image.
+USER root
+RUN dnf -y install httpd
+
+# Copy local code to the container image
 ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-# Install production dependencies.
+# Default env vars
+ENV PORT 8080
+ENV TARGET World
+
+# Install production dependencies
+RUN python3.9 -m pip install --upgrade pip
 RUN pip install Flask gunicorn
+USER nobody
 
 # Run the web service on container startup. Here we use the gunicorn
 # webserver, with one worker process and 8 threads.
