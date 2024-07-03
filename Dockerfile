@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/python-39
+FROM registry.access.redhat.com/ubi9/python-312
 
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
@@ -6,18 +6,20 @@ ENV PYTHONUNBUFFERED True
 USER root
 RUN dnf -y install httpd
 
-# Copy local code to the container image
+# Setup
 ENV APP_HOME /app
 WORKDIR $APP_HOME
-COPY . ./
 
-# Default env vars
+# Dependencies
+COPY ./requirements.txt ./
+RUN python3 -m pip install --upgrade pip && pip install -r ./requirements.txt
+
+# Copy code
+COPY . .
+
+# Final configs
 ENV PORT 8080
 ENV TARGET World
-
-# Install production dependencies
-RUN python3.9 -m pip install --upgrade pip
-RUN pip install Flask gunicorn
 USER nobody
 
 # Run the web service on container startup. Here we use the gunicorn

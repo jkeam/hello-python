@@ -1,7 +1,9 @@
 Dockerfile
 README.md
-service.yaml
 *.pyc
 *.pyo
 *.pyd
 __pycache__
+openshift/
+venv
+.venv

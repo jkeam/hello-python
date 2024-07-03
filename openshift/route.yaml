@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: hello-python 
+spec:
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  to:
+    name: hello-python 

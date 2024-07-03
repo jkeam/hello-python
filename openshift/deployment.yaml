@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-python 
+  labels:
+    app: hello-python 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-python 
+  template:
+    metadata:
+      labels:
+        app: hello-python 
+    spec:
+      containers:
+      - name: hello-python 
+        image: quay.io/jkeam/hello-python
+        ports:
+        - containerPort: 8080
+        env:
+        - name: TARGET
+          valueFrom:
+            secretKeyRef:
+              name: secretdata
+              key: SECRET_TARGET
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+            - name: Accept
+              value: application/json
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+            - name: Accept
+              value: application/json
+          initialDelaySeconds: 2
+          periodSeconds: 2
