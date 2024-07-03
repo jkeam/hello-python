@@ -5,7 +5,7 @@ namespace: hello
 
 images:
 - name: quay.io/jkeam/hello-python
-  digest: sha256:fdae78154ab971cb3beb6c4b0b33336d01606fefd9879448a909e2d7c5efedd0
+  digest: sha256:24f83ad5486ee0cdee99e61f74feb1e4539fe922f4b7fa3355ffb96110b7f796
 
 resources:
   - namespace.yaml
