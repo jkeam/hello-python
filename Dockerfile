@@ -18,6 +18,7 @@ RUN python3 -m pip install --upgrade pip && pip install -r ./requirements.txt
 COPY . .
 
 # Final configs
+EXPOSE 8080
 ENV PORT 8080
 ENV TARGET World
 USER nobody
