@@ -5,6 +5,11 @@ components:
   - name: python
     container:
       image: registry.redhat.io/devspaces/udi-rhel9:3.27
+      endpoints:
+        - exposure: public
+          name: app
+          targetPort: 8080
+          protocol: https
       volumeMounts:
         - name: venv
           path: /home/user/.venv
@@ -17,12 +22,20 @@ components:
     volume:
       size: 1G
 commands:
+  - id: install-dependencies
+    exec:
+      label: "Install dependencies"
+      component: python
+      workingDir: ${PROJECT_SOURCE}/hello-python
+      commandLine: python -m venv .venv && . .venv/bin/activate && pip install -r ./requirements.txt
+      group:
+        kind: build
   - id: run
     exec:
       label: "Run the application"
       component: python
       workingDir: ${PROJECTS_ROOT}/hello-python
-      commandLine: python -m venv .venv && . .venv/bin/activate && python app.py
+      commandLine: . .venv/bin/activate && python app.py
       group:
         kind: run
 
