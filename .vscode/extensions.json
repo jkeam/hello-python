@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.debugpy",
+      "ms-python.vscode-python-envs",
+      "ms-python.black-formatter",
+      "ms-python.flake8",
+      "catppuccin.catppuccin-vsc",
+      "redhat.fabric8-analytics"
+    ]
+}
+
