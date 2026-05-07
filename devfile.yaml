@@ -26,7 +26,7 @@ commands:
     exec:
       label: "Install dependencies"
       component: python
-      workingDir: ${PROJECT_SOURCE}/hello-python
+      workingDir: ${PROJECT_SOURCE}
       commandLine: python -m venv .venv && . .venv/bin/activate && pip install -r ./requirements.txt
       group:
         kind: build
@@ -34,7 +34,7 @@ commands:
     exec:
       label: "Run the application"
       component: python
-      workingDir: ${PROJECTS_ROOT}/hello-python
+      workingDir: ${PROJECTS_SOURCE}
       commandLine: . .venv/bin/activate && python app.py
       group:
         kind: run
