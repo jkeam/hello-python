@@ -34,7 +34,7 @@ commands:
     exec:
       label: "Run the application"
       component: python
-      workingDir: ${PROJECTS_SOURCE}
+      workingDir: ${PROJECT_SOURCE}
       commandLine: source .venv/bin/activate && python app.py
       group:
         kind: run
