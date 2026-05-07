@@ -7,7 +7,7 @@ components:
       image: registry.redhat.io/devspaces/udi-rhel9:3.27
       env:
         - name: TRUSTIFY_DA_PYTHON_VIRTUAL_ENV
-          value: true
+          value: "true"
       endpoints:
         - exposure: public
           name: app
